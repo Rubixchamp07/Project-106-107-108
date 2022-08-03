@@ -1,12 +1,21 @@
+var dog = 0;
+var elephant = 0;
+var monkey = 0;
+var peacock = 0;
+
+
+
 function startClassification()
 {navigator.mediaDevices.getUserMedia({audio:true});
 classifier=ml5.soundClassifier('https://teachablemachine.withgoogle.com/models/RIbAp3f6w/model.json', modelReady);
+document.getElementById('animal_image').src = 'giphy.gif';
 }
 
 function modelReady()
 {  
     console.log("ready");
     classifier.classify( gotResults);
+    document.getElementById('animal_image').src = 'EAR.jpg';
 }
 
 function gotResults(error, results) {
@@ -28,20 +37,23 @@ function gotResults(error, results) {
         
     img = document.getElementById('animal_image');
 
-    if (results[0].label == "Barking") {
-      img.src = 'dog.png';
+    if (results[0].label == "Dog") {
+      alert(results[0].label);
+      document.getElementById('animal_image').src = 'dog.png';
       dog = dog+1;
-    } else if (results[0].label == "Trumping") {
-      img.src = 'elephant.png';
+    }
+      else if (results[0].label == "Elephant"){
+      document.getElementById('animal_image').src = 'elephant.png';
       elephant = elephant + 1;
-    } else if (results[0].label == "Grunting") {
-        img.src = 'monkey.png';
+    }
+      else if (results[0].label == "Monkey") {
+      document.getElementById('animal_image').src = 'monkey.png';
         monkey = monkey + 1;
-    } else if (results[0].label == "Honking") {
-        img.src = 'peacock.png';
+    } else if (results[0].label == "Peacock") {
+      document.getElementById('animal_image').src = 'peacock.png';
         peacock = peacock + 1;
     } else{
-      img.src = 'listen.gif';
+      document.getElementById('animal_image').src = 'giphy.gif';
     }
 
     }
